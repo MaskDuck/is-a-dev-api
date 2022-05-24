@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const fetch = import('node-fetch');
 module.exports.execute = (request, response)=>{
     const domain = request.params.domain;
 
