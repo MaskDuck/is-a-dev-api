@@ -2,33 +2,35 @@ const { application } = require('express');
 const express = require('express');
 const app = express();
 const config = require('./config.json');
-const fetch = require('node-fetch');
+const routes = {
+    login: require('./routes/login'),
+    check: require('./routes/check'),
+    getUser: require('./routes/getUser'),
+    createUser: require('./routes/createUser'),
+}
+const db = require('./functions/database');
+db.connect(config.db);
 
 app.get('/', async(req, res) => {
     res.send('Welcome to is-a.dev api!')
 });
 
 app.get('/check/:domain', async(req, res) => {
-    const domain = req.params.domain;
+    routes.check.execute(req, res);
+});
 
-    fetch(`https://api.github.com/repos/is-a-dev/register/contents/domains/${domain}.json`, {
-            method: 'GET',
-            headers: {
-                'User-Agent': 'mtgsquad'
-            }
-        }).then(async(response) => {
-            if(response.status && response.status == 404) {
-                res.json({
-                    status: 'available',
-                    name: domain + '.is-a.dev'
-                });
-            } else res.json({
-                status: 'unavailable',
-                name: domain + '.is-a.dev'
-            })
-        })
-})
+app.post('/login', async(req, res) => {
+   routes.login.execute(req, res);
+});
+
+app.get('/getUser', async(req, res) => {
+    routes.getUser.execute(req, res);
+});
+
+app.post('/createUser', async(req, res) => {
+    routes.createUser.execute(req, res);
+});
 
 app.listen(config.port, () => {
     console.log('Online')
-})
+});

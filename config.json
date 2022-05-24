@@ -1,3 +1,4 @@
 {
-    "port": 80
+    "port": 80,
+    "db": "mongodb://mongo:r5FvP53GcSye1abYupZj@containers-us-west-33.railway.app:7771"
 }
