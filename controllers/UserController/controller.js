@@ -12,7 +12,10 @@ module.exports.get = (user, response) => {
                 status: 'ERROR'
             });
         } else if(data) {
-            response.json(data);
+            response.json({
+                username: data[0].username,
+                domains: data[0].domains
+            });
         }
     })
 };
