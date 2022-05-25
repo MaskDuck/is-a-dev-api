@@ -2,29 +2,11 @@ const { application } = require('express');
 const express = require('express');
 const app = express();
 const config = require('./config.json');
-const routes = require('./routes/routes')
+const routes = require('./routes/user/routes');
+const router = require('./routes/router');
 const db = require('./functions/database');
 db.connect(config.db);
-
-app.get('/', async(req, res) => {
-    res.send('Welcome to is-a.dev api!')
-});
-
-app.get('/check/:domain', async(req, res) => {
-    routes.check.execute(req, res);
-});
-
-app.post('/login', async(req, res) => {
-   routes.login.execute(req, res);
-});
-
-app.get('/getUser', async(req, res) => {
-    routes.getUser.execute(req, res);
-});
-
-app.post('/createUser', async(req, res) => {
-    routes.createUser.execute(req, res);
-});
+app.use('/', router);
 
 app.listen(config.port, () => {
     console.log('Online')
