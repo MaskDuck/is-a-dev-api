@@ -7,6 +7,7 @@ const router = require('./routes/router');
 const db = require('./functions/database');
 db.connect(config.db);
 app.use('/', router);
+const bcrypt = require('bcrypt');
 
 app.listen(config.port, () => {
     console.log('Online')

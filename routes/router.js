@@ -8,6 +8,8 @@ const routes = {
     information: informationRoutes,
     loginController: loginRoutes
 };
+const bodyParser = require('body-parser');
+router.use(bodyParser.json());
 
 router.get('/', async(req, res) => {
     res.json(routes);
@@ -25,8 +27,12 @@ router.get('/getUser', async(req, res) => {
     userRoutes.getUser.execute(req, res);
 });
 
-router.post('/createUser', async(req, res) => {
-    userRoutes.createUser.execute(req, res);
-});
+router.post('/users/authentication/api/register', async(req, res) => {
+    userRoutes.registerUser.execute(req, res);
+})
+
+router.get('/users/authentication/register', async(req, res) => {
+    userRoutes.register.execute(req, res);
+})
 
 module.exports = router;

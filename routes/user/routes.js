@@ -1,4 +1,5 @@
 module.exports = {
     getUser: require('./getUser'),
-    createUser: require('./createUser'),
+    register: require('./register'),
+    registerUser: require('./registerUser'),
 }
