@@ -2,12 +2,7 @@ const { application } = require('express');
 const express = require('express');
 const app = express();
 const config = require('./config.json');
-const routes = {
-    login: require('./routes/login'),
-    check: require('./routes/check'),
-    getUser: require('./routes/getUser'),
-    createUser: require('./routes/createUser'),
-}
+const routes = require('./routes/routes')
 const db = require('./functions/database');
 db.connect(config.db);
 
