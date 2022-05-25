@@ -3,9 +3,14 @@ const informationRoutes = require('./information/routes');
 const loginRoutes = require('./login/routes');
 const { Router } = require('express');
 const router = Router();
+const routes = {
+    userControlRoutes: userRoutes,
+    information: informationRoutes,
+    loginController: loginRoutes
+};
 
 router.get('/', async(req, res) => {
-    res.send('Welcome to is-a.dev api!')
+    res.json(routes);
 });
 
 router.get('/check/:domain', async(req, res) => {
